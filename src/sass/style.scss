@@ -1,0 +1,117 @@
+@use "./utilities/reset.scss" as *;
+
+:root {
+	--purple: hsl(259, 100%, 65%);
+	--white: hsl(0, 0%, 100%);
+	--off-white: hsl(0, 0%, 94%);
+	--light-grey: hsl(0, 0%, 86%);
+	--smokey-grey: hsl(0, 1%, 44%);
+	--off-black: hsl(0, 0%, 8%);
+	--light-red: hsl(0, 100%, 67%);
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--off-white);
+	font-family: "Poppins", sans-serif;
+}
+
+.main {
+  
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+    row-gap: 2.3em;
+	max-width: 343px;
+	background-color: var(--white);
+	border-radius: 1em;
+	border-bottom-right-radius: 6em;
+	padding: 1.3em;
+
+	&__box {
+        grid-area: 1/1/2/2;
+		display: flex;
+		column-gap: 1em;
+		margin-top: 1.5em;
+		&-content {
+			&-label {
+				display: block;
+				margin-bottom: 0.5em;
+				font-size: 1rem;
+				font-weight: 700;
+				letter-spacing: 2px;
+				color: var(--smokey-grey);
+				text-transform: uppercase;
+			}
+
+			&-input {
+				padding: 0.5em;
+				width: 100%;
+				border: 1px solid var(--light-grey);
+				border-radius: 0.5em;
+				font-weight: 800;
+				font-size: 1.8rem;
+			}
+		}
+	}
+
+    hr {
+        grid-area: 2/1/3/2;
+        width: 100%;
+        color: var(--light-grey);
+    }
+    
+	&__btn {
+        grid-area: 2/1/3/2;
+		display: flex;
+		justify-content: center;
+
+		&-img {
+			border-radius: 50%;
+			background-color: var(--purple);
+			padding: 0.8em;
+
+			width: 75%;
+		}
+	}
+
+    &__content {
+        grid-area: 3/1/4/2;
+        align-self: flex-start;
+
+        &-text {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--purple);
+            
+            span {
+                color: var(--off-black);
+                font-style: italic;
+
+            }
+        }
+    }
+}
+
+// - Mobile: 375px
+// - Desktop: 1440px
+
+// - Font size (inputs): 32px
+
+// ### Font
+
+// - Family: [Poppins](https://fonts.google.com/specimen/Poppins)
+// - Weights: 400i, 700, 800i
+
+// - View an age in years, months, and days after submitting a valid date through the form
+// - Receive validation errors if:
+//   - Any field is empty when the form is submitted
+//   - The day number is not between 1-31
+//   - The month number is not between 1-12
+//   - The date is in the future
+//   - The date is invalid e.g. 31/04/1991 (there are 30 days in April)
+// - View the optimal layout for the interface depending on their device's screen size
+// - See hover and focus states for all interactive elements on the page
+// - **Bonus**: See the age numbers animate to their final number when the form is submitted
