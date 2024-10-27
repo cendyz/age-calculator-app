@@ -1,4 +1,4 @@
-@use "./utilities/reset.scss" as *;
+@use "./utilities/index" as *;
 
 :root {
 	--purple: hsl(259, 100%, 65%);
@@ -52,6 +52,12 @@ body {
 				border-radius: 0.5em;
 				font-weight: 800;
 			}
+
+			&-error {
+				color: var(--light-red);
+				font-size: 1.2rem;
+				display: none;
+			}
 		}
 	}
 
@@ -86,7 +92,6 @@ body {
 	}
 
 	&__content {
-		grid-area: 3/1/4/2;
 		align-self: flex-start;
 
 		&-text {

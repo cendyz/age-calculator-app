@@ -1,0 +1,145 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+:root {
+  --purple: hsl(259, 100%, 65%);
+  --white: hsl(0, 0%, 100%);
+  --off-white: hsl(0, 0%, 94%);
+  --light-grey: hsl(0, 0%, 86%);
+  --smokey-grey: hsl(0, 1%, 44%);
+  --off-black: hsl(0, 0%, 8%);
+  --light-red: hsl(0, 100%, 67%);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--off-white);
+  font-family: "Poppins", sans-serif;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2.3em;
+  max-width: 343px;
+  background-color: var(--white);
+  border-radius: 1em;
+  border-bottom-right-radius: 6em;
+  padding: 1.3em;
+  z-index: 3;
+}
+.main__box {
+  display: flex;
+  -moz-column-gap: 1em;
+       column-gap: 1em;
+  margin-top: 1.5em;
+}
+.main__box-content-label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--smokey-grey);
+  text-transform: uppercase;
+}
+.main__box-content-input {
+  padding: 0.5em;
+  width: 100%;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.5em;
+  font-weight: 800;
+}
+.main__box-content-error {
+  color: var(--light-red);
+  font-size: 1.2rem;
+  display: none;
+}
+.main__btn {
+  width: 100%;
+  position: relative;
+}
+.main__btn::before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 2px;
+  width: 100%;
+  background-color: var(--light-grey);
+  z-index: 0;
+}
+.main__btn-box {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.main__btn-box-img {
+  border-radius: 50%;
+  background-color: var(--purple);
+  padding: 0.8em;
+  z-index: 4;
+  width: 75%;
+}
+.main__content {
+  align-self: flex-start;
+}
+.main__content-text {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--purple);
+}
+.main__content-text span {
+  color: var(--off-black);
+  font-style: italic;
+}/*# sourceMappingURL=main.css.map */
