@@ -4,17 +4,22 @@ const yearInput = document.getElementById("year");
 const inputs = [dayInput, monthInput, yearInput];
 const btn = document.getElementById("btn");
 const regexLetters = /^[a-zA-Z]+$/;
+const date = new Date().getFullYear();
 
 const checkInputsError = input => {
 	const nameOfTheInput = input.previousElementSibling;
 	const errorText = input.nextElementSibling;
-	
+	const numMax = parseFloat(input.max);
+	const yearErrorText = yearInput.nextElementSibling;
 
 	if (input.value === "") {
 		changeColorsToRed(input, nameOfTheInput, errorText);
-	} else if (input.value > 12 || input.value < 1) {
+	} else if (input.value > numMax || input.value < 1) {
 		changeColorsToRed(input, nameOfTheInput, errorText);
 		errorText.textContent = "Must be a valid day";
+	} else if (yearInput.value > date) {
+		changeColorsToRed(yearInput, yearInput.previousElementSibling, yearErrorText);
+		yearErrorText.textContent = "Must be a valid day";
 	} else {
 		changeColorsToNormal(input, nameOfTheInput, errorText);
 	}
@@ -36,8 +41,15 @@ btn.addEventListener("click", () => {
 	inputs.forEach(checkInputsError);
 });
 
+inputs.forEach(input => {
+	input.addEventListener("input", () => {
+		input.value = input.value.replace(/^0+/, "");
+	});
+});
+
 window.onload = () => {
 	inputs.forEach(input => {
-		input.value = "";
+		input.value = 1;
 	});
+	yearInput.value = date;
 };
