@@ -4,7 +4,10 @@ const yearInput = document.getElementById("year");
 const inputs = [dayInput, monthInput, yearInput];
 const btn = document.getElementById("btn");
 const regexLetters = /^[a-zA-Z]+$/;
-const date = new Date().getFullYear();
+const date = new Date()
+const day = new Date().getDate()
+const month = date.getMonth() + 1
+const year = date.getFullYear()
 
 const checkInputsError = input => {
 	const nameOfTheInput = input.previousElementSibling;
@@ -17,13 +20,18 @@ const checkInputsError = input => {
 	} else if (input.value > numMax || input.value < 1) {
 		changeColorsToRed(input, nameOfTheInput, errorText);
 		errorText.textContent = "Must be a valid day";
-	} else if (yearInput.value > date) {
+	} else if (yearInput.value > year) {
 		changeColorsToRed(yearInput, yearInput.previousElementSibling, yearErrorText);
 		yearErrorText.textContent = "Must be a valid day";
 	} else {
 		changeColorsToNormal(input, nameOfTheInput, errorText);
 	}
 };
+
+const calculateDate = () => {
+	let myYear = year - yearInput.value
+	// let myMonth =
+}
 
 const changeColorsToRed = (input, nameOfTheInput, errorText) => {
 	nameOfTheInput.style.color = "hsl(0, 100%, 67%)";
@@ -49,7 +57,7 @@ inputs.forEach(input => {
 
 window.onload = () => {
 	inputs.forEach(input => {
-		input.value = 1;
+		input.value = '';
 	});
-	yearInput.value = date;
+	
 };

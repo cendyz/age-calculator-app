@@ -54,9 +54,10 @@ body {
 			}
 
 			&-error {
-				color: var(--light-red);
-				font-size: 1.2rem;
 				display: none;
+				color: var(--light-red);
+				font-style: italic;
+				font-size: 1.2rem;
 			}
 		}
 	}
@@ -75,6 +76,7 @@ body {
 			width: 100%;
 			background-color: var(--light-grey);
 			z-index: 0;
+			opacity: 0.5;
 		}
 		&-box {
 			margin: 0 auto;
@@ -82,11 +84,11 @@ body {
 			justify-content: center;
 
 			&-img {
+				width: 75%;
+				padding: 0.8em;
 				border-radius: 50%;
 				background-color: var(--purple);
-				padding: 0.8em;
 				z-index: 4;
-				width: 75%;
 			}
 		}
 	}
@@ -102,6 +104,48 @@ body {
 			span {
 				color: var(--off-black);
 				font-style: italic;
+			}
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.main {
+		padding: 3em;
+		max-width: 600px;
+		border-bottom-right-radius: 10em;
+
+		&__box {
+			align-self: flex-start;
+			width: 77%;
+			margin-top: 0;
+
+			&-content {
+				&-input {
+					font-size: 2rem;
+				}
+				&-error {
+					margin-top: 0.5em;
+					font-size: 1.1rem;
+				}
+			}
+		}
+
+		&__btn {
+			&-box {
+				margin-right: 0;
+				&-img {
+					width: 80%;
+					width:63.2333px;
+					padding: 1.3em;
+				}
+			}
+		}
+
+		&__content {
+			&-text {
+				line-height: 1.1;
+				font-size: 7.5rem;
 			}
 		}
 	}
