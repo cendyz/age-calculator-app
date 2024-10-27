@@ -1,74 +1,64 @@
 const Mobile = () => {
-	const times = [
-		{
-			id: 1,
-			time: "days",
-			num: 26,
-		},
-		{
-			id: 2,
-			time: "months",
-			num: 3,
-		},
-		{
-			id: 3,
-			time: "years",
-			num: 38,
-		},
-	];
-
-	const Top = props => {
-		const { time } = props.times;
-		return (
-			<div className='main__box-content'>
-				<label htmlFor={time} className='main__box-content-label'>
-					{time}
-				</label>
-				<input type='text' className='main__box-content-input' />
-			</div>
-		);
-	};
-
-	const Bottom = props => {
-		const { time } = props.times;
-		const { num } = props;
-		return (
-			<p className='main__content-text'>
-				{num} <span>{time}</span>
-			</p>
-		);
-	};
-
 	return (
 		<main className='main'>
 			<div className='main__box'>
-				{times.map(({ time, id }) => {
-					return <Top times={{ time }} key={id} />;
+				{times.map(time => {
+					return <Top {...time} key={time.id} />;
 				})}
 			</div>
-			<button className='main__btn'>
-				<img src='./src/img/icon-arrow.svg' alt='Arrow icon' className='main__btn-img' />
+			<div className="main__btn">
+			<button className='main__btn-box'>
+				<img src='./src/img/icon-arrow.svg' alt='Arrow icon' className='main__btn-box-img' />
 			</button>
-                <hr />
+
+			</div>
+
 			<div className='main__content'>
-				{[...times].reverse().map(({ time, num, id }) => {
-					return <Bottom times={{ time }} num={num} id={id} />;
+				{times.reverse().map(time => {
+					return <Bottom {...time} num={time.num} key={time.id} />;
 				})}
 			</div>
 		</main>
+	);
+};
 
-		//   Day
-		//   DD
+const times = [
+	{
+		time: "days",
+		num: 26,
+		id: 1,
+	},
+	{
+		time: "months",
+		num: 3,
+		id: 2,
+	},
+	{
+		time: "years",
+		num: 38,
+		id: 3,
+	},
+];
 
-		//   Month
-		//   MM
+const Top = props => {
+	const { time } = props;
+	return (
+		<div className='main__box-content'>
+			<label htmlFor={time} className='main__box-content-label'>
+				{time}
+			</label>
+			<input type='text' className='main__box-content-input' />
+		</div>
+	);
+};
 
-		//   Year
-		//   YYYY
+const Bottom = props => {
+	const { time, num, id } = props;
 
-		//   -- years
-		//   -- months
-		//   -- days
+	return (
+		<p className='main__content-text' id={id}>
+			{num} <span>{time}</span>
+		</p>
 	);
 };
 
