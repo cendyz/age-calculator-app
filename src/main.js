@@ -5,8 +5,6 @@ const finalBirthInfo = document.querySelectorAll(".main__content-text span");
 const btn = document.getElementById("btn");
 const inputs = [dayInput, monthInput, yearInput];
 const currentDate = new Date();
-const currentYear = currentDate.getFullYear();
-yearInput.setAttribute("max", currentYear);
 
 const setInputStyles = (input, isValid, message = "") => {
 	const color = isValid ? "hsl(0, 1%, 44%)" : "hsl(0, 100%, 67%)";
