@@ -71,8 +71,8 @@ const calculateBirth = () => {
 
 btn.addEventListener("click", checkInputsError);
 
-// window.onload = () => {
-// 	inputs.forEach(input => {
-// 		input.value = "";
-// 	});
-// };
+window.onload = () => {
+	inputs.forEach(input => {
+		input.value = "";
+	});
+};
