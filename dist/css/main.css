@@ -62,6 +62,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: var(--off-white);
+  background-color: #333;
   font-family: "Poppins", sans-serif;
 }
 
@@ -139,11 +140,11 @@ body {
 .main__content-text {
   font-size: 5rem;
   font-weight: 800;
-  color: var(--purple);
-}
-.main__content-text span {
   color: var(--off-black);
   font-style: italic;
+}
+.main__content-text span {
+  color: var(--purple);
 }
 
 @media (min-width: 992px) {
@@ -159,6 +160,10 @@ body {
   }
   .main__box-content-input {
     font-size: 2rem;
+    transition: border 0.2s;
+  }
+  .main__box-content-input:hover {
+    border: 1px solid var(--off-black);
   }
   .main__box-content-error {
     margin-top: 0.5em;
@@ -171,6 +176,10 @@ body {
     width: 80%;
     width: 63.2333px;
     padding: 1.3em;
+    transition: background-color 0.2s;
+  }
+  .main__btn-box:hover .main__btn-box-img {
+    background-color: var(--off-black);
   }
   .main__content-text {
     line-height: 1.1;
