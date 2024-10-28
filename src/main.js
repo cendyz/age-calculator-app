@@ -1,77 +1,76 @@
 const dayInput = document.getElementById("day");
 const monthInput = document.getElementById("month");
 const yearInput = document.getElementById("year");
-const inputs = [dayInput, monthInput, yearInput];
 const finalBirthInfo = document.querySelectorAll(".main__content-text span");
 const btn = document.getElementById("btn");
-const regexLetters = /^[a-zA-Z]+$/;
+const inputs = [dayInput, monthInput, yearInput];
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 yearInput.setAttribute("max", currentYear);
 
-const checkInputsError = input => {
-	const nameOfTheInput = input.previousElementSibling;
-	const errorText = input.nextElementSibling;
-	const numMax = parseFloat(input.max);
-	const yearErrorText = yearInput.nextElementSibling;
+const setInputStyles = (input, isValid, message = "") => {
+	const color = isValid ? "hsl(0, 1%, 44%)" : "hsl(0, 100%, 67%)";
+	const borderColor = isValid ? "hsl(0, 0%, 86%)" : "hsl(0, 100%, 67%)";
+	const display = isValid ? "none" : "block";
 
-	if (input.value === "") {
-		changeColorsToRed(input, nameOfTheInput, errorText);
-	} else if (input.value > numMax || input.value < 1) {
-		changeColorsToRed(input, nameOfTheInput, errorText);
-		errorText.textContent = `Must be a valid ${nameOfTheInput.textContent}`;
-		allToRed();
-	} else if (yearInput.value > currentYear) {
-		changeColorsToRed(yearInput, yearInput.previousElementSibling, yearErrorText);
-		yearErrorText.textContent = "Must be in the past";
-	} else {
-		changeColorsToNormal(input, nameOfTheInput, errorText);
-		calculateBirth();
+	input.previousElementSibling.style.color = color;
+	input.style.border = `1px solid ${borderColor}`;
+	input.nextElementSibling.style.display = display;
+	input.nextElementSibling.textContent = message;
+};
+
+const validateInput = (input, min, max, message) => {
+	const value = parseInt(input.value);
+	if (value < min || value > max || isNaN(value)) {
+		setInputStyles(input, false, message);
+		return false;
 	}
+	setInputStyles(input, true);
+	return true;
 };
 
-const changeColorsToRed = (input, nameOfTheInput, errorText) => {
-	nameOfTheInput.style.color = "hsl(0, 100%, 67%)";
-	errorText.style.display = "block";
-	input.style.border = "1px solid hsl(0, 100%, 67%)";
-};
+const checkInputsError = () => {
+	let isValid = true;
 
-const allToRed = params => {
-	inputs.forEach(el => {
-		el.previousElementSibling.style.color = "hsl(0, 100%, 67%)";
-		el.style.border = "1px solid hsl(0, 100%, 67%)";
+	isValid &= validateInput(dayInput, 1, 31, "Must be a valid day");
+	isValid &= validateInput(monthInput, 1, 12, "Must be a valid month");
+	isValid &= validateInput(yearInput, 1900, currentYear, "Must be in the past");
+
+	inputs.forEach(input => {
+		if (input.value.trim() === "") {
+			setInputStyles(input, false, "This field is required");
+			isValid = false;
+		}
 	});
-};
 
-const changeColorsToNormal = (input, nameOfTheInput, errorText) => {
-	nameOfTheInput.style.color = "hsl(0, 1%, 44%)";
-	input.style.border = "1px solid hsl(0, 0%, 86%)";
-	errorText.style.display = "none";
+	if (isValid) calculateBirth();
 };
 
 const calculateBirth = () => {
-	let birthDay = currentDate.getDate();
-	let birthMonth = currentDate.getMonth();
-	let birthYear = currentYear;
+	const numDay = parseFloat(dayInput.value);
+	const numMonth = parseFloat(monthInput.value) - 1;
+	const numYear = parseFloat(yearInput.value);
 
-	birthDay = birthDay - dayInput.value;
-	birthMonth = birthMonth - monthInput.value;
-	birthYear = birthYear - yearInput.value;
+	bornDate = new Date(numYear, numMonth, numDay);
 
-	finalBirthInfo[2].textContent = birthDay;
-	finalBirthInfo[1].textContent = birthMonth + 1;
-	finalBirthInfo[0].textContent = birthYear;
+	let years = currentDate.getFullYear() - bornDate.getFullYear();
+	let months = currentDate.getMonth() - bornDate.getMonth();
+	let days = currentDate.getDate() - bornDate.getDate();
+
+	if (days < 0) {
+		months--;
+		days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+	}
+
+	if (months < 0) {
+		years--;
+		months += 12;
+	}
+
+	[years, months, days].forEach((val, i) => (finalBirthInfo[i].textContent = val));
 };
 
-btn.addEventListener("click", () => {
-	inputs.forEach(checkInputsError);
-});
-
-inputs.forEach(input => {
-	input.addEventListener("input", () => {
-		input.value = input.value.replace(/^0+/, "");
-	});
-});
+btn.addEventListener("click", checkInputsError);
 
 // window.onload = () => {
 // 	inputs.forEach(input => {
