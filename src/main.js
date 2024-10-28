@@ -7,31 +7,26 @@ const btn = document.getElementById("btn");
 const regexLetters = /^[a-zA-Z]+$/;
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
-
-console.log(currentYear);
+yearInput.setAttribute("max", currentYear);
 
 const checkInputsError = input => {
 	const nameOfTheInput = input.previousElementSibling;
 	const errorText = input.nextElementSibling;
 	const numMax = parseFloat(input.max);
 	const yearErrorText = yearInput.nextElementSibling;
-	let isValid;
 
 	if (input.value === "") {
 		changeColorsToRed(input, nameOfTheInput, errorText);
 	} else if (input.value > numMax || input.value < 1) {
 		changeColorsToRed(input, nameOfTheInput, errorText);
 		errorText.textContent = `Must be a valid ${nameOfTheInput.textContent}`;
-	}
-
-	// else if (yearInput.value > currentYear ) {
-	// 	changeColorsToRed(yearInput, yearInput.previousElementSibling, yearErrorText);
-	// 	yearErrorText.textContent = "Must be in the past";
-	// }
-	else {
+		allToRed();
+	} else if (yearInput.value > currentYear) {
+		changeColorsToRed(yearInput, yearInput.previousElementSibling, yearErrorText);
+		yearErrorText.textContent = "Must be in the past";
+	} else {
 		changeColorsToNormal(input, nameOfTheInput, errorText);
-		// calculateBirth();
-		
+		calculateBirth();
 	}
 };
 
@@ -39,6 +34,13 @@ const changeColorsToRed = (input, nameOfTheInput, errorText) => {
 	nameOfTheInput.style.color = "hsl(0, 100%, 67%)";
 	errorText.style.display = "block";
 	input.style.border = "1px solid hsl(0, 100%, 67%)";
+};
+
+const allToRed = params => {
+	inputs.forEach(el => {
+		el.previousElementSibling.style.color = "hsl(0, 100%, 67%)";
+		el.style.border = "1px solid hsl(0, 100%, 67%)";
+	});
 };
 
 const changeColorsToNormal = (input, nameOfTheInput, errorText) => {
@@ -49,7 +51,7 @@ const changeColorsToNormal = (input, nameOfTheInput, errorText) => {
 
 const calculateBirth = () => {
 	let birthDay = currentDate.getDate();
-	let birthMonth = currentDate.getMonth() + 1;
+	let birthMonth = currentDate.getMonth();
 	let birthYear = currentYear;
 
 	birthDay = birthDay - dayInput.value;
@@ -57,7 +59,7 @@ const calculateBirth = () => {
 	birthYear = birthYear - yearInput.value;
 
 	finalBirthInfo[2].textContent = birthDay;
-	finalBirthInfo[1].textContent = birthMonth;
+	finalBirthInfo[1].textContent = birthMonth + 1;
 	finalBirthInfo[0].textContent = birthYear;
 };
 
